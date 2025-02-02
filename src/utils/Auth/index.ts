@@ -1,4 +1,4 @@
-import { AuthTokenPayload, VerifyTokenResponse } from "../../types";
+import { AuthTokenPayload, CreateAuthTokenParams, VerifyTokenResponse } from "../../types";
 import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET
@@ -7,7 +7,7 @@ if (!JWT_SECRET) {
     throw new Error("JWT_SECRET is not defined")
 }
 
-export const CreateUserToken = (payload : AuthTokenPayload) => {
+export const CreateUserToken = (payload : CreateAuthTokenParams) => {
 
     return jwt.sign(payload, JWT_SECRET)
 

@@ -12,10 +12,15 @@ export type AuthResponse = {
     token: string
 }
 
+export type CreateAuthTokenParams = {
+    username: string,
+    userId : string,
+}
+
 export type AuthTokenPayload = {
     username: string,
     userId : string,
-    iat? : number
+    iat: number
 }
 
 export type VerifyTokenResponse = {

@@ -7,7 +7,9 @@ import { IUser } from "../types";
 
 const register = expressAsyncHandler(async (req: Request, res: Response) => {
 
-    const { username, password } = req.body
+    const { username, password, name, surname, phone } = req.body
+
+    if (!name || !surname || !phone) return ApiResponse.badRequest(res, "Name, surname and phone fields are required")
 
 
     if (!validator.isAlphanumeric(username) || !password) return ApiResponse.badRequest(res, "Invalid username or password")
@@ -16,7 +18,7 @@ const register = expressAsyncHandler(async (req: Request, res: Response) => {
 
     if (userExists) return ApiResponse.badRequest(res, "Username already exists")
 
-    const user = await UserService.UserCreate(username, password);
+    const user = await UserService.UserCreate(username, password, name, surname, phone);
 
     return ApiResponse.created(res, {
         username: user.username
@@ -30,13 +32,15 @@ const login = expressAsyncHandler(async (req: Request, res: Response) => {
 
     if (!validator.isAlphanumeric(username) || !password) return ApiResponse.badRequest(res, "Invalid username or password")
 
+
     const user = await UserService.UserReadByUsername(username)
+
     if (!user) {
-        return ApiResponse.unauthorized(res, "Invalid username")
+        return ApiResponse.unauthorized(res)
     }
 
     if (!(user as IUser).confirmPassword(password)) {
-        return ApiResponse.unauthorized(res, "Invalid password")
+        return ApiResponse.unauthorized(res)
     }
 
     const token = CreateUserToken({

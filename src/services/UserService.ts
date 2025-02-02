@@ -6,9 +6,9 @@ const UserRead = async (id: string) => {
 
 }
 
-const UserCreate = async (username: string, password: string) => {
+const UserCreate = async (username: string, password: string, name: string, surname: string, phone: Number) => {
 
-    return await UserModel.create({ username, password })
+    return await UserModel.create({ username, password, name, surname, phone })
 
 }
 
@@ -30,10 +30,17 @@ const UserReadByUsername = async (username: string) => {
 
 }
 
+const UserIncreaseBalance = async (id: string, amount: number) => {
+
+    return await UserModel.updateOne({ _id: id }, { $inc: { balance: amount } })
+
+}
+
 export const UserService = {
     UserRead,
     UserCreate,
     UserUpdate,
     UserDelete,
-    UserReadByUsername
+    UserReadByUsername,
+    UserIncreaseBalance
 }

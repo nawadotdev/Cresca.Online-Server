@@ -14,6 +14,32 @@ const userSchema = new Schema<IUser>({
     password: {
         type: String,
         required: true,
+    },
+    balance: {
+        type: Number,
+        default : 0
+    },
+    userRole: {
+        type: Number,
+        default : 0
+    },
+    passwordChangedAt: {
+        type: Number,
+        default : null
+    },
+    name : {
+        type: String,
+        required : true
+    },
+    surname : {
+        type: String,
+        required : true
+    },
+    phone : {
+        type: Number,
+        required : true,
+        min: 1000,
+        max: 99999999
     }
 }, { timestamps: true })
 

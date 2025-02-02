@@ -1,5 +1,6 @@
 import e from "express";
-import { AuthController } from "../controllers/AuthController";
+import { AuthController } from "../controllers";
+
 
 const r = e.Router();
 

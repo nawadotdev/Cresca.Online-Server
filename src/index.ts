@@ -1,10 +1,13 @@
 import express, { NextFunction, Response, Request } from "express"
 import "dotenv/config"
 import { ApiResponse } from "./utils"
-import { AuthRoute } from "./routes"
+import { AuthRoute, TransactionRoute, UserRoute } from "./routes"
 import { connectDB } from "./lib"
+import cors from "cors"
 
 const app = express()
+
+app.use(cors())
 app.use(express.json({ limit: "16kb" }))
 app.use((err: Error, req: Request, res: Response, next: NextFunction): any => {
     if ('type' in err && err.type === 'entity.too.large') {
@@ -17,6 +20,8 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction): any => {
 })
 
 app.use("/api/auth", AuthRoute)
+app.use("/api/user", UserRoute)
+app.use("/api/transaction", TransactionRoute)
 
 //error handling
 app.use((err: Error, req: Request, res: Response, next: NextFunction): any => {
