@@ -1,3 +1,5 @@
 export * from "./UserService"
 export * from "./BankingApi"
 export * from "./TransactionService"
+export * from "./BillService"
+export * from "./EventService"

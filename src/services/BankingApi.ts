@@ -19,7 +19,7 @@ const CheckPayment = async (token: string) => {
 
         const data = await resp.json()
         console.log(data)
-        if (data.routing_to != 10063312 || data.token_expired) {
+        if (data.routing_to != process.env.COMPANY_ROUTING || data.token_expired) {
             return {
                 error: "Invalid token",
                 success: false

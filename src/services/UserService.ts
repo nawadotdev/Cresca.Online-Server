@@ -32,7 +32,13 @@ const UserReadByUsername = async (username: string) => {
 
 const UserIncreaseBalance = async (id: string, amount: number) => {
 
-    return await UserModel.updateOne({ _id: id }, { $inc: { balance: amount } })
+    return await UserModel.findOneAndUpdate({ _id: id }, { $inc: { balance: amount } })
+
+}
+
+const UserDecreaseBalance = async (id: string, amount: number) => {
+
+    return await UserModel.findOneAndUpdate({ _id: id }, { $inc: { balance: -amount } })
 
 }
 
@@ -42,5 +48,6 @@ export const UserService = {
     UserUpdate,
     UserDelete,
     UserReadByUsername,
-    UserIncreaseBalance
+    UserIncreaseBalance,
+    UserDecreaseBalance
 }

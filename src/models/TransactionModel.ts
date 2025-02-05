@@ -1,5 +1,5 @@
-import { model, Schema } from "mongoose";
-import { ITransaction } from "../types";
+import { model, Schema } from "mongoose"
+import { ITransaction } from "../types"
 
 const transactionSchema = new Schema<ITransaction>({
     userId: {
@@ -11,19 +11,14 @@ const transactionSchema = new Schema<ITransaction>({
         type: Number,
         required: true
     },
-    reason: {
+    billId: {
         type: String,
-        required: true
+        required: false,
+        ref: "Bill"
     },
-    token: {
+    depositToken: {
         type: String,
-    },
-    product: {
-        type: String,
-        required: true
-    },
-    routingFrom: {
-        type: Number,
+        required: false
     }
 }, { timestamps: true })
 

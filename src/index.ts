@@ -4,6 +4,7 @@ import { ApiResponse } from "./utils"
 import { AuthRoute, TransactionRoute, UserRoute } from "./routes"
 import { connectDB } from "./lib"
 import cors from "cors"
+import { EventRoute } from "./routes/EventRoute"
 
 const app = express()
 
@@ -22,6 +23,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction): any => {
 app.use("/api/auth", AuthRoute)
 app.use("/api/user", UserRoute)
 app.use("/api/transaction", TransactionRoute)
+app.use("/api/events", EventRoute)
 
 //error handling
 app.use((err: Error, req: Request, res: Response, next: NextFunction): any => {
